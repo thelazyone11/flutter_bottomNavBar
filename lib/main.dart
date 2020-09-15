@@ -39,6 +39,39 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  _bottomNavItem(IconData icon, Color contanerColor, Color iconColor, int index,
+      String title) {
+    return BottomNavigationBarItem(
+        title: Text(title),
+        icon: _selectedIndex == index
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(40.0),
+                child: Container(
+                  height: 50,
+                  width: 100,
+                  color: contanerColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Icon(
+                        icon,
+                        color: iconColor,
+                      ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                            color: iconColor, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            : Icon(
+                icon,
+                color: Colors.black,
+              ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,126 +86,14 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: Colors.deepOrangeAccent,
         onTap: _onItemTapped,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              title: Text('Home'),
-              icon: _selectedIndex == 0
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.indigo[50],
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.home,
-                              color: Colors.indigo,
-                            ),
-                            Text(
-                              "Home",
-                              style: TextStyle(
-                                  color: Colors.indigo,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  : Icon(
-                      Icons.home,
-                      color: Colors.black,
-                    )),
-          BottomNavigationBarItem(
-              title: Text('Fav'),
-              icon: _selectedIndex == 1
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.pink[50],
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.favorite_border,
-                              color: Colors.pink,
-                            ),
-                            Text(
-                              "Likes",
-                              style: TextStyle(
-                                  color: Colors.pink,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  : Icon(
-                      Icons.favorite_border,
-                      color: Colors.black,
-                    )),
-          BottomNavigationBarItem(
-              title: Text('Search'),
-              icon: _selectedIndex == 2
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.amber[50],
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.search,
-                              color: Colors.amber,
-                            ),
-                            Text(
-                              "Search",
-                              style: TextStyle(
-                                  color: Colors.amber,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  : Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    )),
-          BottomNavigationBarItem(
-              title: Text('Profile'),
-              icon: _selectedIndex == 3
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(40.0),
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        color: Colors.lightBlue[50],
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Icon(
-                              Icons.person_outline,
-                              color: Colors.lightBlue,
-                            ),
-                            Text(
-                              "Profile",
-                              style: TextStyle(
-                                  color: Colors.lightBlue,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  : Icon(
-                      Icons.person_outline,
-                      color: Colors.black,
-                    )),
+          _bottomNavItem(
+              Icons.home, Colors.indigo[50], Colors.indigo, 0, "Home"),
+          _bottomNavItem(
+              Icons.favorite_border, Colors.pink[50], Colors.pink, 1, "Likes"),
+          _bottomNavItem(
+              Icons.search, Colors.amber[50], Colors.amber, 2, "Search"),
+          _bottomNavItem(Icons.person_outline, Colors.lightBlue[50],
+              Colors.lightBlue, 3, "Profile")
         ],
       ),
     );
